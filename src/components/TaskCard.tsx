@@ -49,6 +49,7 @@ export function TaskCard({ task, onClick }: TaskCardProps) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    touchAction: 'none',
   }
 
   const priority = PRIORITY_CONFIG[task.priority]
