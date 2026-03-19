@@ -2,6 +2,7 @@ import {
   DndContext,
   DragOverlay,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
@@ -52,7 +53,8 @@ export function Board({ userId }: BoardProps) {
   const selectedTask = tasks.find((t) => t.id === selectedTaskId) ?? null
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 5 } })
   )
 
   function handleDragStart(event: DragStartEvent) {
@@ -257,13 +259,13 @@ export function Board({ userId }: BoardProps) {
       </header>
 
       {/* Board */}
-      <main className="p-6 pb-12">
+      <main className="px-4 md:px-6 py-4 md:py-6 pb-12">
         <DndContext
           sensors={sensors}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
-          <div className="flex gap-5 overflow-x-auto pb-4">
+          <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory md:snap-none">
             {COLUMNS.map((col) => (
               <Column
                 key={col.id}

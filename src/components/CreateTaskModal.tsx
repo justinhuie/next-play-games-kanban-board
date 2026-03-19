@@ -103,6 +103,7 @@ export function CreateTaskModal({
           <div className="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100 flex-wrap">
             {/* Priority */}
             <div className="flex items-center gap-1">
+              <span className="text-xs font-semibold text-slate-400 mr-1">Priority:</span>
               {(Object.entries(PRIORITY_CONFIG) as [Priority, typeof PRIORITY_CONFIG[Priority]][]).map(
                 ([key, cfg]) => (
                   <button
