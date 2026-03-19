@@ -71,6 +71,35 @@ In your Supabase dashboard go to **Authentication → Sign In / Up** and enable 
 
 ### Database Schema
 
+## Advanced Features
+
+All 7 optional advanced features were implemented:
+
+1. **Team Members & Assignees** — Users can add team members with auto-assigned avatar colors. Members can be assigned to tasks and their initials appear as avatars on task cards with name tooltips on hover.
+
+2. **Task Comments** — Each task has a comments tab in the detail modal. Comments are stored in Supabase and displayed chronologically with relative timestamps.
+
+3. **Task Activity Log** — Status changes are automatically logged and displayed in the Activity tab of the task detail view (e.g. "Moved from To Do → In Progress · 2h ago").
+
+4. **Labels / Tags** — Users can create custom labels with auto-assigned colors and attach multiple labels to tasks. Labels can be filtered from the board header.
+
+5. **Due Date Indicators** — Task cards show color-coded due date badges: gray for 4+ days, amber for 2-3 days, orange for 1 day or due today, red for overdue.
+
+6. **Search & Filtering** — A search bar filters tasks by title. A Filter dropdown allows filtering by priority, assignee, and label simultaneously.
+
+7. **Board Summary / Stats** — The header shows total tasks, tasks completed, and overdue count in real time.
+
+**Bonus:** Confetti animation plays when a task is dropped into the Done column.
+
+## Tradeoffs & What I'd Improve
+
+- **Task ordering within columns** is currently by creation order. A future improvement would be drag-to-reorder within columns or an optional sort-by-priority toggle.
+- **Real-time updates** are not implemented — the board does not sync live across multiple sessions. Supabase Realtime subscriptions would solve this.
+- **Mobile drag-and-drop** works but is less smooth than desktop due to browser touch event handling. A tap-to-move interaction would provide a better mobile experience.
+- **Dark mode** was considered but deprioritized in favor of feature completeness. It would be straightforward to add with Tailwind's `dark:` variants.
+
+## Database Schema
+
 Run the following SQL in the Supabase SQL editor:
 
 ```sql
