@@ -107,7 +107,7 @@ I also added a confetti animation that plays when a task is dropped into the Don
 
 **Improvements**
 - **Real-time updates** 
-  - Are not implemented — the board does not sync live across multiple sessions. Supabase Realtime subscriptions would solve this.
+  - Are not implemented. The board does not sync live across multiple sessions. Supabase Realtime subscriptions would solve this.
 - **Mobile drag-and-drop** 
   - Works but is less smooth than desktop due to browser touch event handling. A tap-to-move interaction would provide a better mobile experience.
 - **Dark mode** 
