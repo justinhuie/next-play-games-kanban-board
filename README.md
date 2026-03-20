@@ -27,7 +27,6 @@ A fully-featured Kanban-style task board built with React, TypeScript, and Supab
 
 - **Frontend:** React 19, TypeScript, Tailwind CSS, Vite
 - **Backend:** Supabase (PostgreSQL + Auth)
-- **Drag and Drop:** @dnd-kit/core, @dnd-kit/sortable
 - **Hosting:** Vercel
 
 ## Local Setup
@@ -89,14 +88,34 @@ All 7 optional advanced features were implemented:
 
 7. **Board Summary / Stats** — The header shows total tasks, tasks completed, and overdue count in real time.
 
-**Bonus:** Confetti animation plays when a task is dropped into the Done column.
+I also added a confetti animation that plays when a task is dropped into the Done column.
 
 ## Tradeoffs & What I'd Improve
 
-- **Task ordering within columns** is currently by creation order. A future improvement would be drag-to-reorder within columns or an optional sort-by-priority toggle.
-- **Real-time updates** are not implemented — the board does not sync live across multiple sessions. Supabase Realtime subscriptions would solve this.
-- **Mobile drag-and-drop** works but is less smooth than desktop due to browser touch event handling. A tap-to-move interaction would provide a better mobile experience.
-- **Dark mode** was considered but deprioritized in favor of feature completeness. It would be straightforward to add with Tailwind's `dark:` variants.
+**Tradeoffs**
+- **How should the tasks be ordered in each column?**
+  - I choose ordering to be manual done instead of an automatic ordering system because if the kanban board were to be ordered by an attribute like priority or due date, then other users who would want the ordering to be different wouldn't like the kanban board so I thought it would be best for the user to choose the ordering themselves
+- **Should priority be a structured field or a label?**
+  - I chose to make priority a structured field rather than a label because priority is a universal concept that benefits from a consistent structure. The tradeoff is some overlap with labels.
+- **Should the app be a single page or have multiple pages?**
+  - I kept it as a single page because it keeps the board always visible and reduces context switich. The tradeoff is that tasks don't have shareable URLs so you can't link someone directly to a specfic task.
+- **Should assignee avatars show full names or initials?**
+  - I used initial-based avatarsd with color coding rather than full names because multiple assignees on a card would make the card too tall with full names. The tradeoff is that initials are ambiguous when team members share the same first letter. To compromise, I added a tooltip to hover over avatars to show the full name. 
+
+
+**Improvements**
+- **Real-time updates** 
+  - Are not implemented — the board does not sync live across multiple sessions. Supabase Realtime subscriptions would solve this.
+- **Mobile drag-and-drop** 
+  - Works but is less smooth than desktop due to browser touch event handling. A tap-to-move interaction would provide a better mobile experience.
+- **Dark mode** 
+  - Was considered but deprioritized in favor of feature completeness. It would be straightforward to add with Tailwind's `dark:` variants.
+- **Multiple boards per user**
+  - Right now each user only has one board per account. Adding a feature to create multiple kanban boards would improve the user experience for people who want to have seperate boards (for example, to seperate project).
+- **Edit/delete comments**
+  - Right now the comments are permanent and cannot be changed/deleted when made
+- **Due date reminders or notifications**
+  - An improvement to the due date system would be to notify the user after a certain threshold was pass and make that threshold customizable
 
 ## Database Schema
 
