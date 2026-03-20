@@ -71,6 +71,7 @@ export function TaskModal({
   const [newComment, setNewComment] = useState('')
   const [sendingComment, setSendingComment] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const [newMemberName, setNewMemberName] = useState('')
   const [newLabelName, setNewLabelName] = useState('')
 
@@ -187,7 +188,11 @@ export function TaskModal({
   }
 
   const handleDelete = async () => {
-    if (!confirm('Delete this task? This cannot be undone.')) return
+    setConfirmDelete(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    setConfirmDelete(false)
     setDeleting(true)
     await onDelete()
   }
@@ -207,7 +212,7 @@ export function TaskModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -551,6 +556,30 @@ export function TaskModal({
           </div>
         </div>
       </div>
+
+      {/* Delete confirmation */}
+      {confirmDelete && (
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center rounded-2xl z-10">
+          <div className="bg-white rounded-2xl shadow-xl p-6 mx-6 text-center">
+            <p className="text-sm font-semibold text-slate-800 mb-1">Delete this task?</p>
+            <p className="text-xs text-slate-400 mb-5">This cannot be undone.</p>
+            <div className="flex gap-2 justify-center">
+              <button
+                onClick={() => setConfirmDelete(false)}
+                className="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
