@@ -68,9 +68,15 @@ I built this using React and TypeScript because I have prior experience with bot
 
 ## Supabase Setup
 
+### Get your API keys
+
+1. Go to your Supabase project → **Settings → API Keys**
+2. Copy the **Project URL** and the **Publishable (anon) key**
+3. Paste them into your `.env.local` file as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+
 ### Enable Anonymous Sign-ins
 
-In your Supabase dashboard go to **Authentication → Sign In / Up** and enable **Allow anonymous sign-ins**.
+In your Supabase dashboard go to **Authentication → Sign In / Up** and enable **Allow anonymous sign-ins**. Also make sure **Confirm email** is toggled off.
 
 ## Advanced Features
 
