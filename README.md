@@ -2,6 +2,10 @@
 
 A fully-featured Kanban-style task board built with React, TypeScript, and Supabase. Inspired by tools like Asana and Linear.
 
+# Overview and Design Decisions
+
+I built this using React and TypeScript because I have prior experience with both and knew I could produce quality work with them. TypeScript's type system was useful for catching mistakes early. For styling I used Tailwind CSS because it keeps styles co-located with components to make it easier to iterate on designs quickly. I chose to call Supabase directly from the frontend rather than building a separate backend API because the built-in RLS policies handle authorization at the database level which makes the middleware layer unnecessary for this scope. 
+
 ## Live Demo
 
 [https://next-play-games-kanban-board.vercel.app](https://next-play-games-kanban-board.vercel.app)
@@ -68,8 +72,6 @@ A fully-featured Kanban-style task board built with React, TypeScript, and Supab
 
 In your Supabase dashboard go to **Authentication → Sign In / Up** and enable **Allow anonymous sign-ins**.
 
-### Database Schema
-
 ## Advanced Features
 
 All 7 optional advanced features were implemented:
@@ -94,13 +96,13 @@ I also added a confetti animation that plays when a task is dropped into the Don
 
 **Tradeoffs**
 - **How should the tasks be ordered in each column?**
-  - I choose ordering to be manual done instead of an automatic ordering system because if the kanban board were to be ordered by an attribute like priority or due date, then other users who would want the ordering to be different wouldn't like the kanban board so I thought it would be best for the user to choose the ordering themselves
+  - I chose manual ordering instead of an automatic ordering system because if the board were sorted by an attribute like priority or due date, users who want a different ordering wouldn't be able to change it. It felt best to let the user decide the order themselves.
 - **Should priority be a structured field or a label?**
   - I chose to make priority a structured field rather than a label because priority is a universal concept that benefits from a consistent structure. The tradeoff is some overlap with labels.
 - **Should the app be a single page or have multiple pages?**
-  - I kept it as a single page because it keeps the board always visible and reduces context switich. The tradeoff is that tasks don't have shareable URLs so you can't link someone directly to a specfic task.
+  - I kept it as a single page because it keeps the board always visible and reduces context switching. The tradeoff is that tasks don't have shareable URLs so you can't link someone directly to a specific task.
 - **Should assignee avatars show full names or initials?**
-  - I used initial-based avatarsd with color coding rather than full names because multiple assignees on a card would make the card too tall with full names. The tradeoff is that initials are ambiguous when team members share the same first letter. To compromise, I added a tooltip to hover over avatars to show the full name. 
+  - I used initial-based avatars with color coding rather than full names because multiple assignees on a card would make the card too tall with full names. The tradeoff is that initials are ambiguous when team members share the same first letter. To compromise, I added a tooltip on hover to show the full name.
 
 
 **Improvements**
@@ -111,11 +113,11 @@ I also added a confetti animation that plays when a task is dropped into the Don
 - **Dark mode** 
   - Was considered but deprioritized in favor of feature completeness. It would be straightforward to add with Tailwind's `dark:` variants.
 - **Multiple boards per user**
-  - Right now each user only has one board per account. Adding a feature to create multiple kanban boards would improve the user experience for people who want to have seperate boards (for example, to seperate project).
+  - Right now each user only has one board per account. Adding the ability to create multiple boards would improve the experience for users who want to separate projects.
 - **Edit/delete comments**
   - Right now the comments are permanent and cannot be changed/deleted when made
 - **Due date reminders or notifications**
-  - An improvement to the due date system would be to notify the user after a certain threshold was pass and make that threshold customizable
+  - An improvement to the due date system would be to notify the user after a certain threshold has passed and make that threshold customizable.
 
 ## Database Schema
 
